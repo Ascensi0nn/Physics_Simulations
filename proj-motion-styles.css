@@ -1,0 +1,49 @@
+*{
+  position: absolute;
+}
+
+.proj-motion-title {
+  width: 450px;
+  height: 38;
+  left: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border: solid rgb(210, 245, 245) 2px;
+  border-radius: 19px;
+  background-color: rgb(250, 255, 255);
+}
+
+.proj-motion-signature {
+  top: 7px;
+  height: 38px;
+  width: 150px;
+  left: 500px;
+}
+
+.proj-motion {
+  top: 75px;
+  width: 1200px;
+  height: 600px;
+  border: solid black 2px;
+  background: beige;
+  margin: 10px;
+}
+
+.proj-motion-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14pt;
+  left: 10px;
+  top: 10px;
+  margin: 0;
+  z-index: 10;
+}
+.proj-motion-text-box {
+  width: 287px;
+  height: 137px;
+  left: 5px;
+  top: 5px;
+  background-color:rgb(255, 255, 247);
+  border: solid black 1px;
+  z-index: 5;
+}
