@@ -1,3 +1,28 @@
 html {
-  background-color:azure;
+  background-color:rgb(20, 20, 20);
+}
+
+.github-link {
+  position: absolute;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  color: white;
+  background-color: rgb(50, 50, 50);
+  border-left: solid rgb(50, 50, 50) 2px;
+  border-right: solid rgb(50, 50, 50) 2px;  
+  border-top: solid rgb(200, 200, 200) 2px;
+  border-bottom: solid rgb(200, 200, 200) 2px;
+  border-radius: 5px;
+  width: 135px;
+  height: 35px;
+  left: 1050px;
+  top: 10px;
+  padding: 5px;
+  transition: 0.2s ease-in-out;
+}
+
+.github-link:hover {
+  background-color: rgb(150, 150, 150);
+  border: solid rgb(200, 200, 200) 2px;
+  color: black;
 }
