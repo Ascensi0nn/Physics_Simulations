@@ -1,5 +1,5 @@
 html {
-  background-color:rgb(20, 20, 20);
+  background-color:rgb(0, 0, 0);
 }
 
 .github-link {
@@ -7,9 +7,9 @@ html {
   font-family: 'Courier New', Courier, monospace;
   font-size: 16px;
   color: white;
-  background-color: rgb(50, 50, 50);
-  border-left: solid rgb(50, 50, 50) 2px;
-  border-right: solid rgb(50, 50, 50) 2px;  
+  background-color: rgb(80, 45, 100);
+  border-left: solid rgb(80, 45, 100) 2px;
+  border-right: solid rgb(80, 45, 100) 2px;  
   border-top: solid rgb(200, 200, 200) 2px;
   border-bottom: solid rgb(200, 200, 200) 2px;
   border-radius: 5px;
@@ -22,7 +22,7 @@ html {
 }
 
 .github-link:hover {
-  background-color: rgb(150, 150, 150);
+  background-color: rgb(219, 181, 235);
   border: solid rgb(200, 200, 200) 2px;
   color: black;
 }
