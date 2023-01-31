@@ -3,86 +3,98 @@ html {
 }
 /* ---------------------------- */
 
-.title {
-  width: 450px;
-  height: 38;
-  left: 20px;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color:rgb(171, 171, 171);
-  border-left: solid rgb(200, 200, 200) 2px;
-  border-top: solid rgb(200, 200, 200) 2px;
-  border-radius: 10px;
-  background-color:rgb(50, 50, 50);
+#title {
+  color:white;
+  font-family: monospace;
+  font-size: 60px;
+  left: 225px;
+  top: 15px;
+  border-left:solid rgb(205, 205, 205) 2px;
+  border-radius: 5px;
+  width: 1000px;
+  height: 75px;
+  margin: 0px;
+  padding-left: 15px;
+  transition: 0.2s
+}
+#title:hover {
+  color:rgb(157, 182, 228);
+  border-color: blue;
 }
 
-.signature {
-  font-family: 'Courier New', Courier, monospace;
-  top: 7px;
-  height: 38px;
-  width: 150px;
-  left: 500px;
-  border-bottom: solid rgb(200, 200, 200) 2px;
-  border-left: solid rgb(200, 200, 200) 2px;
-  background-color:rgb(50, 50, 50);
+#logo {
+  font-family:monospace;
+  line-height: 20px;
+  letter-spacing: 10px;
+  font-size: 20px;
+  top: 15px;
+  left: 15px;
+  width: 75px;
+  height: 75px;
+  background-color:black;
   border-radius: 5px;
-  padding-left: 3px;
   color:aliceblue;
+  transition: 0.1s ease-in;
+}
+#logo:hover {
+  width: 85px;
+  height: 85px;
+  top: 10px;
+  left: 10px;
+  font-size: 26px;
+  line-height: 25px;
+  margin: 0px;
 }
 
 .github-link {
   position: absolute;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
+  font-family: monospace;
+  font-size: 25px;
+  letter-spacing: 10px;
+  line-height: 35px;
   color: white;
-  background-color: rgb(80, 45, 100);
-  border-left: solid rgb(80, 45, 100) 2px;
-  border-right: solid rgb(80, 45, 100) 2px;  
+  background-color: rgb(0, 0, 0);
   border-top: solid rgb(200, 200, 200) 2px;
   border-bottom: solid rgb(200, 200, 200) 2px;
   border-radius: 5px;
-  width: 135px;
-  height: 35px;
-  left: 1050px;
+  width: 70px;
+  height: 70px;
+  left: 110px;
+  top: 15px;
+  padding-left: 5px;
+  transition: 0.1s ease-in;
+}
+.github-link:hover {
+  width: 80px;
+  height: 80px;
+  left: 105px;
   top: 10px;
-  padding: 5px;
-  transition: 0.2s ease-in-out;
+  font-size: 30px;
+  line-height: 40px;
 }
 
-.github-link:hover {
-  background-color: rgb(219, 181, 235);
-  border: solid rgb(200, 200, 200) 2px;
-  color: black;
-}
 /* ---------------------------- */
 .cards {
   position: absolute;
-  margin:0px;
-  padding:0px;
-  border-left: solid blue 5px;
-  border-top: solid blue 5px;
-  border-right:solid cornflowerblue 5px;
-  border-bottom:solid cornflowerblue 5px;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 /* ---------------------------- */
 #proj-card {
-  background-color: rgb(205, 205, 205);
+  background: rgb(205, 205, 205);
 }
 
 #proj-card-holder {
   width: 100%;
   height: 100%;
-  object-fit: fill;
-  opacity: 0.1;
-  transition: 0.3s;
+  opacity: 0;
+  transition: 0.3s ease-out;
 }
 #proj-card-holder:hover {
   opacity: 1;
 }
 #proj-img {
+  border-radius: 5px;
   width: 100%;
   height: 100%;
 }

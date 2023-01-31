@@ -26,7 +26,7 @@ let downDown = false
 
 function initialize() {
   ball.src = "ball.png"
-  ball.classList.add('ball')
+  ball.classList.add('proj-ball')
   ball.style.left = ballPos[0] + 'px'
   ball.style.top = ballPos[1] + 'px'
   ball.style.width = ballSize + 'px'
@@ -136,7 +136,7 @@ function drawGraph() {
 }
 
 function drawText() {
-  let vals = document.getElementById('proj-motion-text')
+  let vals = document.getElementById('text')
   vals.innerText = `X position: ${Math.round((ballPos[0] - ballStartingPos[0] + Number.EPSILON) * 100) / 100}m
 Y position: ${Math.round((-1 * (ballPos[1] - ballStartingPos[1]) + Number.EPSILON) * 100) / 100}m
 Initial Velocity: ${Math.round((vel + Number.EPSILON) * 100) / 100}m/s
@@ -231,9 +231,9 @@ function gameLoop() {
 }
 
 export function start() {
-  document.getElementById('proj-motion').style.display = "inline"
-  document.getElementById('proj-motion-text-box').style.display = "inline"
-  document.getElementById('proj-motion-text').style.display = "inline"
+  document.getElementById('proj-motion').style.display = "block"
+  document.getElementById('text-box').style.display = "block"
+  document.getElementById('text').style.display = "block"
 
   initialize()
   reset()

@@ -11,9 +11,10 @@
   border-radius: 5px;
   background: rgb(75, 75, 70);
   margin: 10px;
+  transition: 0.5s;
 }
 
-#proj-motion-text {
+#text.proj-motion {
   font-family: 'Courier New', Courier, monospace;
   font-size: 14pt;
   left: 10px;
@@ -21,7 +22,7 @@
   margin: 0;
   z-index: 20;
 }
-#proj-motion-text-box {
+#text-box.proj-motion {
   display:none;
   width: 287px;
   height: 137px;

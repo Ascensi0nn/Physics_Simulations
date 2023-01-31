@@ -2,49 +2,32 @@
   position: absolute;
 }
 
-.obj-collision-title {
-  top: 700px;
-  left: 20px;
-  width: 435px;
-  height: 38;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  border: solid rgb(210, 245, 245) 2px;
-  border-radius: 19px;
-  background-color: rgb(250, 255, 255);
-}
-
-.obj-collision-signature {
-  top: 714px;
-  height: 38px;
-  width: 150px;
-  left: 500px;
-}
-
-.obj-collision {
-  top: 800px;
+#obj-collision {
+  display: none;
+  top: 75px;
   width: 1200px;
   height: 600px;
-  border: solid black 2px;
-  background: beige;
+  border: solid azure 2px;
+  border-radius: 5px;
+  background: rgb(75, 75, 70);
   margin: 10px;
 }
 
-.obj-collision-text {
+#obj-collision-text {
   font-family: 'Courier New', Courier, monospace;
   font-size: 14pt;
   left: 10px;
   top: 10px;
   margin: 0;
-  z-index: 10;
+  z-index: 20;
 }
-.obj-collision-text-box {
+#obj-collision-text-box {
+  display:none;
   width: 287px;
   height: 137px;
   left: 5px;
   top: 5px;
-  background-color:rgb(255, 255, 247);
-  border: solid black 1px;
+  background-color:rgb(174, 174, 158);
+  border: solid white 1px;
   z-index: 5;
 }

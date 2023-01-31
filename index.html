@@ -2,12 +2,17 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Game Time</title>
+    <title>Physics Simulations</title>
     <link rel="stylesheet" href="styles.css"></link>
     <link rel="stylesheet" href="proj-motion-styles.css"></link>
     <link rel="stylesheet" href="obj-collision-styles.css"></link>
   </head>
   <body>
+    <!-- Header -->
+    <a style="text-decoration: none" class="github-link" href="https://github.com/Ascensi0nn" target="_blank">git<br>hub</a>
+    <button id="logo">app<br>hys<br>ics</button>
+    <h1 id="title">Physics Simulations</h1>
+
     <!-- Selection Cards -->
     <div class="cards" id="proj-card">
       <div id="proj-card-holder">
@@ -20,30 +25,20 @@
     <div class="cards" id="electric-field-card"></div>
 
     <!-- Projectile Motion Simulator -->
-    
-    <h1 class="title">Physics Simulations</h1>
-    <p class="signature">created by Owen Luts, 2023</p>
-
     <div class="proj-motion" id="proj-motion">
-      <div class="proj-motion" id="proj-motion-text-box"></div>
-      <pre class="proj-motion" id="proj-motion-text"></pre>
+      <div class="proj-motion" id="text-box"></div>
+      <pre class="proj-motion" id="text"></pre>
       <canvas class="proj-motion" id="proj-motion-canvas"></canvas>
     </div>
     
-  
-    <!-- link to github repository -->
-    <a style="text-decoration: none" class="github-link" href="https://github.com/Ascensi0nn" target="_blank">See more on my github :)</a>
-
-    <!-- Object Collision Simulator
-    <h1 class="obj-collision-title">Object Collision Simulator</h1>
-    <p class="obj-collision-signature">created by Owen Luts, 1/26/2023</p>
-    <div class="obj-collision">
-      <div class="obj-collision-text-box"></div>
-      <pre class="obj-collision-text"></pre>
-      <canvas class="obj-collision-canvas"></canvas>
+    <!-- Object Collision Simulator -->
+    <div class="obj-collision" id="obj-collision">
+      <div class="blue obj-collision-text"></div>
+      <div class="blue obj-collision-text-box"></div>
+      <img class="blue obj-collision-ball">
     </div>
-    <script src="obj-collision.js" charset="utf-8"></script>
-    -->
+
+
     <script src="proj-motion.js" type="module" charset="utf-8"></script>
     <script src="index.js" type="module"charset="utf-8"></script>
 
