@@ -8,16 +8,29 @@
     <link rel="stylesheet" href="obj-collision-styles.css"></link>
   </head>
   <body>
-    <!-- Projectile Motion Simulator -->
-    <h1 class="proj-motion-title">Projectile Motion Simulator</h1>
-    <p class="proj-motion-signature">created by Owen Luts, 1/26/2023</p>
-    <div class="proj-motion">
-      <div class="proj-motion-text-box"></div>
-      <pre class="proj-motion-text" id="vals"></pre>
-      <canvas class="proj-motion-canvas"></canvas>
+    <!-- Selection Cards -->
+    <div class="cards" id="proj-card">
+      <div id="proj-card-holder">
+        <img id="proj-img" src="proj-motion.png">
+        <p id="proj-card-text">Projectile Motion</p>
+      </div>
     </div>
-    <script src="proj-motion.js" charset="utf-8"></script>
+    <div class="cards" id="collision-card"></div>
+    <div class="cards" id="pendulum-card"></div>
+    <div class="cards" id="electric-field-card"></div>
 
+    <!-- Projectile Motion Simulator -->
+    
+    <h1 class="title">Physics Simulations</h1>
+    <p class="signature">created by Owen Luts, 2023</p>
+
+    <div class="proj-motion" id="proj-motion">
+      <div class="proj-motion" id="proj-motion-text-box"></div>
+      <pre class="proj-motion" id="proj-motion-text"></pre>
+      <canvas class="proj-motion" id="proj-motion-canvas"></canvas>
+    </div>
+    
+  
     <!-- link to github repository -->
     <a style="text-decoration: none" class="github-link" href="https://github.com/Ascensi0nn" target="_blank">See more on my github :)</a>
 
@@ -31,6 +44,8 @@
     </div>
     <script src="obj-collision.js" charset="utf-8"></script>
     -->
+    <script src="proj-motion.js" type="module" charset="utf-8"></script>
+    <script src="index.js" type="module"charset="utf-8"></script>
 
   </body>
 </html>

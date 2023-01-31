@@ -2,35 +2,8 @@
   position: absolute;
 }
 
-.proj-motion-title {
-  width: 450px;
-  height: 38;
-  left: 20px;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color:rgb(171, 171, 171);
-  border-left: solid rgb(200, 200, 200) 2px;
-  border-top: solid rgb(200, 200, 200) 2px;
-  border-radius: 10px;
-  background-color:rgb(50, 50, 50);
-}
-
-.proj-motion-signature {
-  font-family: 'Courier New', Courier, monospace;
-  top: 7px;
-  height: 38px;
-  width: 150px;
-  left: 500px;
-  border-bottom: solid rgb(200, 200, 200) 2px;
-  border-left: solid rgb(200, 200, 200) 2px;
-  background-color:rgb(50, 50, 50);
-  border-radius: 5px;
-  padding-left: 3px;
-  color:aliceblue;
-}
-
-.proj-motion {
+#proj-motion {
+  display: none;
   top: 75px;
   width: 1200px;
   height: 600px;
@@ -40,15 +13,16 @@
   margin: 10px;
 }
 
-.proj-motion-text {
+#proj-motion-text {
   font-family: 'Courier New', Courier, monospace;
   font-size: 14pt;
   left: 10px;
   top: 10px;
   margin: 0;
-  z-index: 10;
+  z-index: 20;
 }
-.proj-motion-text-box {
+#proj-motion-text-box {
+  display:none;
   width: 287px;
   height: 137px;
   left: 5px;

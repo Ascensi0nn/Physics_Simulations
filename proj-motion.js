@@ -1,9 +1,9 @@
 // Constants
-const background = document.querySelector('.proj-motion')
+const background = document.getElementById('proj-motion')
 const width = 1200
 const height = 600
 const gravity = -9.8
-const c = document.querySelector('.proj-motion-canvas')
+const c = document.getElementById('proj-motion-canvas')
 c.width = width; 
 c.height = height;
 const ctx = c.getContext('2d')
@@ -70,10 +70,10 @@ function keyUpHandler(event) {
 }
 
 function changeValues() {
-  if (leftDown) {
+  if (leftDown && angle < 90) {
     angle += 1
-  } if (rightDown) {
-    angle -= 1
+  } if (rightDown && angle > 0) {
+      angle -= 1   
   } if (upDown) {
     vel += 1
   } if (downDown) {
@@ -93,7 +93,7 @@ function moveBall() {
   let vel_x = vel * Math.cos(radians(angle))
   let vel_yi = -1 * vel * Math.sin(radians(angle))
 
-  currentVel_y = -1 * (vel_yi - gravity * time)
+  let currentVel_y = -1 * (vel_yi - gravity * time)
 
   if (!ball_hit) {
     if (currentVel_y < 0 && ballPos[1] + ballSize >= height && time > 0.1) {
@@ -136,8 +136,8 @@ function drawGraph() {
 }
 
 function drawText() {
-  let vals = document.getElementById('vals')
-  vals.textContent = `X position: ${Math.round((ballPos[0] - ballStartingPos[0] + Number.EPSILON) * 100) / 100}m
+  let vals = document.getElementById('proj-motion-text')
+  vals.innerText = `X position: ${Math.round((ballPos[0] - ballStartingPos[0] + Number.EPSILON) * 100) / 100}m
 Y position: ${Math.round((-1 * (ballPos[1] - ballStartingPos[1]) + Number.EPSILON) * 100) / 100}m
 Initial Velocity: ${Math.round((vel + Number.EPSILON) * 100) / 100}m/s
 Angle: ${Math.round((angle + Number.EPSILON) * 100) / 100} degrees
@@ -230,25 +230,30 @@ function gameLoop() {
   window.requestAnimationFrame(gameLoop);
 }
 
-document.title = "Projectile Motion"
-initialize()
-reset()
+export function start() {
+  document.getElementById('proj-motion').style.display = "inline"
+  document.getElementById('proj-motion-text-box').style.display = "inline"
+  document.getElementById('proj-motion-text').style.display = "inline"
 
-document.addEventListener("keydown", keyDownHandler, false)
-document.addEventListener("keyup", keyUpHandler, false)
-document.addEventListener("keydown", function(event) {
-  if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(event.code) > -1) {
-    event.preventDefault();
-  }
-  switch (event.key) {
-    case " ":
-      shot = true
-      break;
-    case "r":
-      reset()
-      break;
-    default:
-      return;
-  }
-})
-window.requestAnimationFrame(gameLoop);
+  initialize()
+  reset()
+  
+  document.addEventListener("keydown", keyDownHandler, false)
+  document.addEventListener("keyup", keyUpHandler, false)
+  document.addEventListener("keydown", function(event) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(event.code) > -1) {
+      event.preventDefault();
+    }
+    switch (event.key) {
+      case " ":
+        shot = true
+        break;
+      case "r":
+        reset()
+        break;
+      default:
+        return;
+    }
+  })
+  window.requestAnimationFrame(gameLoop);
+}
