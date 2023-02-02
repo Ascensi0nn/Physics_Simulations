@@ -7,15 +7,10 @@ const c = document.getElementById('pendulum-canvas')
 c.width = width; 
 c.height = height;
 const ctx = c.getContext('2d')
-
-//Ball
-const ballSize = 40
-const ballStartingPos = [width / 2 - ballSize / 2, triangleHeight + length]
-let ballPos = ballStartingPos
-let ballPositions = []
+const triangleHeight = 25
 
 // variables
-let maxAngle, currentAngle, time, triangleHeight, launch, length
+let maxAngle, currentAngle, time, launch, length
 
 //input
 let leftDown = false
@@ -23,13 +18,18 @@ let rightDown = false
 let upDown = false
 let downDown = false
 
+//Ball
+const ballSize = 40
+const ballStartingPos = [width / 2 - ballSize / 2, triangleHeight + length]
+let ballPos = ballStartingPos
+
 function reset() {
-  triangleHeight = 25
   ballPos = [width / 2 - ballSize / 2, triangleHeight + length]
   length = 100
   maxAngle = 0
   currentAngle = 0
   time = 0
+  launch = false
 }
 
 function keyDownHandler(event) {
@@ -95,8 +95,8 @@ function moveBall() {
 }
 
 function drawGraph() {
-  let tileSize = 50
   ctx.beginPath()
+  let tileSize = 50
   ctx.lineWidth = 1
   
   for (let i = 0; i < 1200; i += tileSize) {
@@ -114,17 +114,14 @@ function drawGraph() {
 function drawText() {
   let vals = document.getElementById('text')
   vals.innerText = `X position: ${Math.round((ballPos[0] - ballStartingPos[0] + Number.EPSILON) * 100) / 100}m
-Y position: ${Math.round((-1 * (ballPos[1] - ballStartingPos[1]) + Number.EPSILON) * 100) / 100}m
-Initial Velocity: ${Math.round((vel + Number.EPSILON) * 100) / 100}m/s
-Angle: ${Math.round((angle + Number.EPSILON) * 100) / 100} degrees
-Height: ${(Math.round((height- ballPos[1] - ballSize + Number.EPSILON) * 100) / 100)}m
-Ground Height: ${height - groundHeight - ballSize}m`
+Angle: ${currentAngle}degrees
+Length: ${length}m`
   vals.style.margin = '0em 1'
 }
 
 function drawSpeedArrows() {
-  const lineConstant = 0.07
-  const lineWidth = 3
+  ctx.beginPath()
+  const lineConstant = 2
   const arrowConstant = 6
   let arrowConstantX = arrowConstant
   let arrowConstantY = arrowConstant
@@ -150,8 +147,7 @@ function drawSpeedArrows() {
   } else {
     arrowConstantY = Math.abs(arrowConstantY)
   }
-
-  ctx.beginPath()
+  ctx.lineWidth = 2
   // X
   ctx.moveTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2)
   ctx.lineTo(ballPos[0] + xLineLength + ballSize / 2, ballPos[1] + ballSize / 2)
@@ -166,9 +162,7 @@ function drawSpeedArrows() {
   ctx.moveTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2 + yLineLength)
   ctx.lineTo(ballPos[0] + ballSize / 2 + arrowConstantX, ballPos[1] + ballSize / 2 + yLineLength + arrowConstantY)
   ctx.moveTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2 + yLineLength)  
-  ctx.lineTo(ballPos[0] + ballSize / 2 + arrowConstantX, ballPos[1] + ballSize / 2 + yLineLength + arrowConstantY)
-
-
+  ctx.lineTo(ballPos[0] + ballSize / 2 - arrowConstantX, ballPos[1] + ballSize / 2 + yLineLength + arrowConstantY)
   ctx.stroke()
 }
 
@@ -183,25 +177,38 @@ function drawWindow() {
   drawGraph()
   drawSpeedArrows()
   drawText()
+  let ball = document.getElementById('pendulum-ball')
   ball.style.left = ballPos[0] + 'px'
   ball.style.top = ballPos[1] + 'px'
+  ball.style.width = ballSize + 'px'
+  ball.style.height = ballSize + 'px'
+  ball.style.zIndex = 20;
+
+  ctx.beginPath()
+  ctx.moveTo(width / 2, triangleHeight)
+  ctx.lineTo(width / 2 + triangleHeight, 0)
+  ctx.moveTo(width / 2, triangleHeight)
+  ctx.lineTo(width / 2 - triangleHeight, 0)
+
+  ctx.moveTo(width / 2, triangleHeight)
+  ctx.lineTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2)
+  ctx.stroke()
 }
 
 function gameLoop() {
-  if (shot) {
+  if (launch) {
     moveBall()
-  }
-  else {
+  } else {
     changeValues()
   }
   drawWindow()
   window.requestAnimationFrame(gameLoop);
 }
 
-export function projStart() {
-  document.getElementById('proj-motion').style.display = "block"
-  document.getElementById('text-box').style.display = "block"
-  document.getElementById('text').style.display = "block"
+export function pendulumStart() {
+  document.getElementById('pendulum').style.display = "block"
+  document.getElementById('pendulum-text-box').style.display = "block"
+  document.getElementById('pendulum-text').style.display = "block"
 
   reset()
   
@@ -213,7 +220,7 @@ export function projStart() {
     }
     switch (event.key) {
       case " ":
-        shot = true
+        launch = true
         break;
       case "r":
         reset()

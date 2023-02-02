@@ -161,7 +161,6 @@ function drawSpeedArrows() {
 
   let currentAngle = degrees(Math.atan(vel_y / vel_x))
 
-
   // X
   ctx.moveTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2)
   ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2)

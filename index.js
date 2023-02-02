@@ -1,5 +1,6 @@
 import { projStart } from "./proj-motion.js"
 import { objStart } from "./obj-collision.js"
+import { pendulumStart } from "./pendulum.js"
 
 const w = window.innerWidth;
 const h = window.innerHeight; 
@@ -55,6 +56,7 @@ function clickObjCollision() {
 }
 
 function clickPendulum() {
+  pendulumStart()
   hideCards()
 }
 
@@ -81,7 +83,8 @@ document.addEventListener("keydown", function(event) {
   if (event.key == "Escape") {
     document.getElementById('proj-motion').style.display = "none"
     document.getElementById('obj-collision').style.display = "none"
-    // add all canvases here
+    document.getElementById('pendulum').style.display = "none"
+    // add all backgrounds here
 
 
     let cards = document.getElementsByClassName('cards')

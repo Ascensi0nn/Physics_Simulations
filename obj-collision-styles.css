@@ -15,7 +15,6 @@
 }
 
 #blue-obj-collision-text-box {
-  display:none;
   width: 287px;
   height: 87px;
   left: 906px;
@@ -34,7 +33,6 @@
 }
 
 #red-obj-collision-text-box {
-  display:none;
   width: 287px;
   height: 87px;
   left: 5px;

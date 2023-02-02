@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <title>Physics Simulations</title>
     <link rel="icon" type="image/x-icon" href="ball.png">
-    <link rel="stylesheet" href="styles.css"></link>
-    <link rel="stylesheet" href="proj-motion-styles.css"></link>
-    <link rel="stylesheet" href="obj-collision-styles.css"></link>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="proj-motion-styles.css">
+    <link rel="stylesheet" href="obj-collision-styles.css">
+    <link rel="stylesheet" href="pendulum-styles.css">
   </head>
   <body>
     <!-- Header -->
@@ -63,10 +64,9 @@
     <div class="pendulum" id="pendulum">
       <pre id="pendulum-text"></pre>
       <div id="pendulum-text-box"></div>
-      <img class="pendulum-ball">
+      <img id="pendulum-ball" src="ball.png">
       <canvas id="pendulum-canvas"></canvas>
     </div>
-
 
     <script src="index.js" type="module" charset="utf-8"></script>
     <script src="proj-motion.js" type="module" charset="utf-8"></script>
