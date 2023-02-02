@@ -1,4 +1,5 @@
-import { start } from "./proj-motion.js"
+import { projStart } from "./proj-motion.js"
+import { objStart } from "./obj-collision.js"
 
 const w = window.innerWidth;
 const h = window.innerHeight; 
@@ -18,10 +19,9 @@ function hideCards() {
 function logo() {
   const original = "apphysics"
   const originalHTML = "app<br>hys<br>ics"
-  console.log(originalHTML)
   const lst = original.split('')
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'
-  let iterations = 5
+  let iterations = 0
 
   const interval = setInterval(() => {
     for (let i = 0; i < original.length; i++) {
@@ -32,30 +32,34 @@ function logo() {
     }
     let str = lst.join('')
     str = str.replace(/(.{3})/g, '$1<br>');
-    if (iterations >= 9) {
+    if (iterations >= original.length) {
       clearInterval(interval)
       str = originalHTML
-    } 
+    }
     document.getElementById('logo').innerHTML = str
-    iterations++
+    iterations += 1
   }, 60)
 }
 
 function clickProjMotion() {
+  // let src = 'proj-motion.js'
+  // $('script[src="' + src + '"]').remove();
+  // $('<script>').attr('src', src).appendTo('head');
   hideCards()
-  start()
+  projStart()
 }
 
 function clickObjCollision() {
-
+  objStart()
+  hideCards()
 }
 
 function clickPendulum() {
-
+  hideCards()
 }
 
 function clickElectricField() {
-
+  hideCards()
 }
 
 for (let i = 0; i < elements.length; i += 1) {
@@ -68,14 +72,15 @@ for (let i = 0; i < elements.length; i += 1) {
 }
 
 document.getElementById('proj-card').addEventListener('click', clickProjMotion)
-document.getElementById('collision-card').addEventListener('click', clickObjCollision)
+document.getElementById('obj-card').addEventListener('click', clickObjCollision)
 document.getElementById('pendulum-card').addEventListener('click', clickPendulum)
-document.getElementById('electric-field-card').addEventListener('click', clickElectricField)
+document.getElementById('e-field-card').addEventListener('click', clickElectricField)
 document.getElementById('logo').addEventListener('mouseover', logo)
 
 document.addEventListener("keydown", function(event) {
   if (event.key == "Escape") {
     document.getElementById('proj-motion').style.display = "none"
+    document.getElementById('obj-collision').style.display = "none"
     // add all canvases here
 
 

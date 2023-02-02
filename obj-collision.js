@@ -1,48 +1,60 @@
 // Constants
-const background = document.querySelector('.obj-motion')
+const background = document.getElementById('obj-collision')
 const width = 1200
 const height = 600
-const gravity = -9.8
-const c = document.querySelector('canvas')
-c.width = width; 
+const c = document.getElementById('obj-canvas')
+c.width = width;
 c.height = height;
 const ctx = c.getContext('2d')
 
-//Ball
-const ball = document.createElement('img')
+//Balls
 const ballSize = 40
-const ballStartingPos = [10, height - ballSize]
-let ballPos = ballStartingPos
-let ballPositions = []
+const ballStartingMass = 50
+const ballBlueStartingPos = [width - ballSize - 10, height - ballSize]
+const ballRedStartingPos = [10, height - ballSize]
+
+const ballBlue = document.getElementById('blue-obj-collision-ball')
+let ballBlueMass = ballStartingMass
+let ballBluePos = ballBlueStartingPos
+
+const ballRed = document.getElementById('red-obj-collision-ball')
+let ballRedMass = ballStartingMass
+let ballRedPos = ballRedStartingPos
 
 // variables
-let angle, vel, time, groundHeight, shot, ball_hit
+let ballBlueVel, ballRedVel, shot, contact
 
 //input
 let leftDown = false
 let rightDown = false
 let upDown = false
 let downDown = false
+let wDown = false
+let aDown = false
+let sDown = false
+let dDown = false
 
 function initialize() {
-  ball.src = "ball.png"
-  ball.classList.add('ball')
-  ball.style.left = ballPos[0] + 'px'
-  ball.style.top = ballPos[1] + 'px'
-  ball.style.width = ballSize + 'px'
-  ball.style.height = ballSize + 'px'
-  background.appendChild(ball)
+  ballBlue.style.left = ballBluePos[0] + 'px'
+  ballBlue.style.top = ballBluePos[1] + 'px'
+  ballBlue.style.width = ballSize + 'px'
+  ballBlue.style.height = ballSize + 'px'
+
+  ballRed.style.left = ballRedPos[0] + 'px'
+  ballRed.style.top = ballRedPos[1] + 'px'
+  ballRed.style.width = ballSize + 'px'
+  ballRed.style.height = ballSize + 'px'
 }
 
 function reset() {
-  ballPos = [10, height - ballSize]
-  time = 0
+  ballBluePos = [width - ballSize - 10, height - ballSize]
+  ballBlueMass = ballStartingMass
+  ballRedPos = [10, height - ballSize]
+  ballRedMass = ballStartingMass
   shot = false
-  ball_hit = false
-  vel = 50
-  angle = 45
-  ballPositions = []
-  groundHeight = height - ballSize
+  contact = false
+  ballBlueVel = -10
+  ballRedVel = 10
 }
 
 function keyDownHandler(event) {
@@ -54,6 +66,15 @@ function keyDownHandler(event) {
     upDown = true
   } if (event.key == "ArrowDown") {
     downDown = true
+  }
+  if (event.key == "w") {
+    wDown = true
+  } if (event.key == "a") {
+    aDown = true
+  } if (event.key == "s") {
+    sDown = true
+  } if (event.key == "d") {
+    dDown = true
   }
 }
 
@@ -67,55 +88,79 @@ function keyUpHandler(event) {
   } if (event.key == "ArrowDown") {
     downDown = false
   }
+  if (event.key == "w") {
+    wDown = false
+  } if (event.key == "a") {
+    aDown = false
+  } if (event.key == "s") {
+    sDown = false
+  } if (event.key == "d") {
+    dDown = false
+  }
 }
 
 function changeValues() {
   if (leftDown) {
-    angle += 1
-  } if (rightDown) {
-    angle -= 1
+    ballBlueVel -= 1
+  } if (rightDown && ballBlueVel < 0) {
+    ballBlueVel += 1   
   } if (upDown) {
-    vel += 1
-  } if (downDown) {
-    vel -= 1
+    ballBlueMass += 1
+  } if (downDown && ballBlueMass > 0) {
+    ballBlueMass -= 1
+  }
+  if (aDown && ballRedVel > 0) {
+    ballRedVel -= 1
+  } if (dDown) {
+    ballRedVel += 1   
+  } if (wDown) {
+    ballRedMass += 1
+  } if (sDown && ballRedMass > 0) {
+    ballRedMass -= 1
   }
 }
 
-function radians(num) {
-  return num * (Math.PI / 180)
-}
+function moveBalls() {
+  if (ballRedPos[0] + ballSize > ballBluePos[0] && !contact) {
+    let t1_b = ballBlueVel * (ballBlueMass - ballRedMass) / (ballBlueMass + ballRedMass)
+    let t2_b = ballRedVel * (2 * ballRedMass) / (ballBlueMass + ballRedMass)
+    let ballBlueFinal = t1_b + t2_b
+    let t1_r = ballBlueVel * (2 * ballBlueMass) / (ballBlueMass + ballRedMass)
+    let t2_r = ballRedVel * (ballRedMass - ballBlueMass) / (ballBlueMass + ballRedMass)
+    let ballRedFinal = t1_r + t2_r
 
-function degrees(num) {
-  return num * (180 / Math.PI)
-}
-
-function moveBall() {
-  let vel_x = vel * Math.cos(radians(angle))
-  let vel_yi = -1 * vel * Math.sin(radians(angle))
-
-  currentVel_y = -1 * (vel_yi - gravity * time)
-
-  if (!ball_hit) {
-    if (currentVel_y < 0 && ballPos[1] + ballSize >= height && time > 0.1) {
-      ballPos[1] = groundHeight - ballSize
-      let t;
-      /*if (height - ballStartingPos[1] < groundHeight) {
-        t = (-1 * vel_yi + Math.sqrt((Math.pow(vel_yi, 2) + 2 * gravity * (height - ballStartingPos[1] - groundHeight)))) / (-1 * gravity)
-      }*/
-      
-      t = 2 * vel_yi / gravity
-      
-      ballPos[0] = ballStartingPos[0] + vel_x * t
-      ballPos[1] = groundHeight
-      ball_hit = true
-    }
-    else {
-      ballPos[0] = vel_x * time + ballStartingPos[0]
-      ballPos[1] = vel_yi * time - 0.5 * gravity * Math.pow(time, 2) + ballStartingPos[1]
-      time += 0.1
-    }
-    ballPositions.push([ballPos[0], ballPos[1]])
+    ballRedVel = ballRedFinal
+    ballBlueVel = ballBlueFinal
+    contact = true
   }
+
+  const velConst = 5
+  //RED MOVEMENT
+  if (ballRedPos[0] >= width - ballSize) {
+    ballRedPos[0] = width - ballSize
+    ballRedVel = 0
+  }
+  else if (ballRedPos[0] < 0) {
+    ballRedPos[0] = 0
+    ballRedVel = 0
+  }
+  else {
+    ballRedPos[0] += ballRedVel / velConst
+  }
+
+  //BLUE MOVEMENT
+  if (ballBluePos[0] >= width - ballSize) {
+    ballBluePos[0] = width - ballSize
+    ballBlueVel = 0
+  }
+  else if (ballBluePos[0] < 0) {
+    ballBluePos[0] = 0
+    ballBlueVel = 0
+  }
+  else {
+    ballBluePos[0] += ballBlueVel / velConst
+  }
+  
 }
 
 function drawGraph() {
@@ -136,14 +181,16 @@ function drawGraph() {
 }
 
 function drawText() {
-  let vals = document.getElementById('vals')
-  vals.textContent = `X position: ${Math.round((ballPos[0] - ballStartingPos[0] + Number.EPSILON) * 100) / 100}m
-Y position: ${Math.round((-1 * (ballPos[1] - ballStartingPos[1]) + Number.EPSILON) * 100) / 100}m
-Initial Velocity: ${Math.round((vel + Number.EPSILON) * 100) / 100}m/s
-Angle: ${Math.round((angle + Number.EPSILON) * 100) / 100} degrees
-Height: ${(Math.round((height- ballPos[1] - ballSize + Number.EPSILON) * 100) / 100)}m
-Ground Height: ${height - groundHeight - ballSize}m`
-  vals.style.margin = '0em 1'
+  let blueVals = document.querySelector('.blue-text')
+  blueVals.innerText = `
+Blue Velocity: ${Math.round((ballBlueVel + Number.EPSILON) * 100) / 100}m/s
+Blue Mass: ${ballBlueMass}kg`
+  blueVals.style.margin = '0em 1'
+  let redVals = document.querySelector('.red-text')
+  redVals.innerText = `
+Red Velocity: ${Math.round((ballRedVel + Number.EPSILON) * 100) / 100}m/s
+Red Mass: ${ballRedMass}kg`
+  redVals.style.margin = '0em 1'
 }
 
 function drawSpeedArrows() {
@@ -151,56 +198,28 @@ function drawSpeedArrows() {
   const lineWidth = 3
   const arrowConstant = 6
 
-  const vel_x = vel * Math.cos(radians(angle))
-  const vel_y = vel * Math.sin(radians(angle)) + gravity * time
-  const xLineLength = vel_x / lineConstant
-  const yLineLength = vel_y / lineConstant
+  const blueLineLength = ballBlueVel / lineConstant
+  const redLineLength = ballRedVel / lineConstant
 
   ctx.beginPath()
   ctx.lineWidth = lineWidth
 
-  let currentAngle = degrees(Math.atan(vel_y / vel_x))
+  // red
+  ctx.moveTo(ballRedPos[0] + ballSize, ballRedPos[1] + ballSize / 2)
+  ctx.lineTo(ballRedPos[0] + ballSize + redLineLength, ballRedPos[1] + ballSize / 2)
+  ctx.moveTo(ballRedPos[0] + ballSize + redLineLength, ballRedPos[1] + ballSize / 2)
+  ctx.lineTo(ballRedPos[0] + ballSize + redLineLength - arrowConstant, ballRedPos[1] + ballSize / 2 + arrowConstant)
+  ctx.moveTo(ballRedPos[0] + ballSize + redLineLength, ballRedPos[1] + ballSize / 2)
+  ctx.lineTo(ballRedPos[0] + ballSize + redLineLength - arrowConstant, ballRedPos[1] + ballSize / 2 - arrowConstant)
 
+  // blue
+  ctx.moveTo(ballBluePos[0], ballBluePos[1] + ballSize / 2)
+  ctx.lineTo(ballBluePos[0] + blueLineLength, ballBluePos[1] + ballSize / 2)
+  ctx.moveTo(ballBluePos[0] + blueLineLength, ballBluePos[1] + ballSize / 2)
+  ctx.lineTo(ballBluePos[0] + blueLineLength + arrowConstant, ballBluePos[1] + ballSize / 2 + arrowConstant)
+  ctx.moveTo(ballBluePos[0] + blueLineLength, ballBluePos[1] + ballSize / 2)
+  ctx.lineTo(ballBluePos[0] + blueLineLength + arrowConstant, ballBluePos[1] + ballSize / 2 - arrowConstant)
 
-  // X
-  ctx.moveTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2)
-  ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2)
-  ctx.moveTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2)
-  ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength - arrowConstant, ballPos[1] + ballSize / 2 + arrowConstant)
-  ctx.moveTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2)
-  ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength - arrowConstant, ballPos[1] + ballSize / 2 - arrowConstant)
-
-  // Y
-  let pt1, pt2, a_pt1, a1_pt2, a2_pt2;
-  if (vel_y > 0) {
-    pt1 = [ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2]
-    pt2 = [ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2 - yLineLength]
-    a_pt1 = [ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2 - yLineLength]
-    a1_pt2 = [ballPos[0] + ballSize / 2 - arrowConstant, ballPos[1] + ballSize / 2 - yLineLength + arrowConstant]
-    a2_pt2 = [ballPos[0] + ballSize / 2 + arrowConstant, ballPos[1] + ballSize / 2 - yLineLength + arrowConstant]
-  }
-  else {
-    pt1 = [ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2]
-    pt2 = [ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2 - yLineLength]
-    a_pt1 = [ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2 - yLineLength]
-    a1_pt2 = [ballPos[0] + ballSize / 2 - arrowConstant, ballPos[1] + ballSize / 2 - yLineLength - arrowConstant]
-    a2_pt2 = [ballPos[0] + ballSize / 2 + arrowConstant, ballPos[1] + ballSize / 2 - yLineLength - arrowConstant]
-  }
-
-  ctx.moveTo(pt1[0], pt1[1]); ctx.lineTo(pt2[0], pt2[1])
-  ctx.moveTo(a_pt1[0], a_pt1[1]); ctx.lineTo(a1_pt2[0], a1_pt2[1])
-  ctx.moveTo(a_pt1[0], a_pt1[1]); ctx.lineTo(a2_pt2[0], a2_pt2[1])
-
-  // DIAGONAL
-  ctx.moveTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2)
-  ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2 - yLineLength)
-  let p_1 = [ballPos[0] + ballSize / 2 + xLineLength + arrowConstant * Math.cos(radians(currentAngle + 135)), ballPos[1] + ballSize / 2 - yLineLength - arrowConstant * Math.sin(radians(currentAngle + 135))]
-  let p_2 = [ballPos[0] + ballSize / 2 + xLineLength + arrowConstant * Math.cos(radians(currentAngle - 135)), ballPos[1] + ballSize / 2 - yLineLength - arrowConstant * Math.sin(radians(currentAngle - 135))]
-
-  ctx.moveTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2 - yLineLength)
-  ctx.lineTo(p_1[0], p_1[1])
-  ctx.moveTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2 - yLineLength)
-  ctx.lineTo(p_2[0], p_2[1])
   ctx.stroke()
 }
 
@@ -215,13 +234,15 @@ function drawWindow() {
   drawGraph()
   drawSpeedArrows()
   drawText()
-  ball.style.left = ballPos[0] + 'px'
-  ball.style.top = ballPos[1] + 'px'
+  ballBlue.style.left = ballBluePos[0] + 'px'
+  ballBlue.style.top = ballBluePos[1] + 'px'
+  ballRed.style.left = ballRedPos[0] + 'px'
+  ballRed.style.top = ballRedPos[1] + 'px'
 }
 
 function gameLoop() {
   if (shot) {
-    moveBall()
+    moveBalls()
   }
   else {
     changeValues()
@@ -230,25 +251,32 @@ function gameLoop() {
   window.requestAnimationFrame(gameLoop);
 }
 
-document.title = "Projectile Motion"
-initialize()
-reset()
+export function objStart() {
+  document.getElementById('obj-collision').style.display = "block"
+  document.getElementById('blue-obj-collision-text').style.display = "block"
+  document.getElementById('blue-obj-collision-text-box').style.display = "block"
+  document.getElementById('red-obj-collision-text').style.display = "block"
+  document.getElementById('red-obj-collision-text-box').style.display = "block"
 
-document.addEventListener("keydown", keyDownHandler, false)
-document.addEventListener("keyup", keyUpHandler, false)
-document.addEventListener("keydown", function(event) {
-  if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(event.code) > -1) {
-    event.preventDefault();
-  }
-  switch (event.key) {
-    case " ":
-      shot = true
-      break;
-    case "r":
-      reset()
-      break;
-    default:
-      return;
-  }
-})
-window.requestAnimationFrame(gameLoop);
+  initialize()
+  reset()
+  
+  document.addEventListener("keydown", keyDownHandler, false)
+  document.addEventListener("keyup", keyUpHandler, false)
+  document.addEventListener("keydown", function(event) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight", "w", "a", "s", "d"].indexOf(event.code) > -1) {
+      event.preventDefault();
+    }
+    switch (event.key) {
+      case " ":
+        shot = true
+        break;
+      case "r":
+        reset()
+        break;
+      default:
+        return;
+    }
+  })
+  window.requestAnimationFrame(gameLoop);
+}

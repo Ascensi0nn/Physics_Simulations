@@ -2,7 +2,7 @@
   position: absolute;
 }
 
-#obj-collision {
+.obj-collision {
   display: none;
   top: 75px;
   width: 1200px;
@@ -11,23 +11,50 @@
   border-radius: 5px;
   background: rgb(75, 75, 70);
   margin: 10px;
+  transition: 0.5s;
 }
 
-#obj-collision-text {
+#blue-obj-collision-text-box {
+  display:none;
+  width: 287px;
+  height: 87px;
+  left: 906px;
+  top: 5px;
+  background-color:rgb(174, 174, 158);
+  border: solid white 1px;
+  z-index: 5;
+}
+.blue-text {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14pt;
-  left: 10px;
-  top: 10px;
+  font-size: 16pt;
+  left: 911px;
+  top: -2px;
   margin: 0;
   z-index: 20;
 }
-#obj-collision-text-box {
+
+#red-obj-collision-text-box {
   display:none;
   width: 287px;
-  height: 137px;
+  height: 87px;
   left: 5px;
   top: 5px;
   background-color:rgb(174, 174, 158);
   border: solid white 1px;
   z-index: 5;
+}
+.red-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16pt;
+  left: 10px;
+  top: -2px;
+  margin: 0;
+  z-index: 20;
+}
+
+#red-obj-collision-ball {
+  z-index: 20;
+}
+#blue-obj-collision-ball {
+  z-index: 20;
 }

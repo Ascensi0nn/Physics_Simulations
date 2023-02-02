@@ -230,7 +230,7 @@ function gameLoop() {
   window.requestAnimationFrame(gameLoop);
 }
 
-export function start() {
+export function projStart() {
   document.getElementById('proj-motion').style.display = "block"
   document.getElementById('text-box').style.display = "block"
   document.getElementById('text').style.display = "block"
