@@ -61,10 +61,10 @@ function changeValues() {
     maxAngle += 1
   } if (rightDown) {
       maxAngle -= 1   
-  } if (upDown) {
-    length += 1
-  } if (downDown && length > 1) {
+  } if (upDown && length > 1) {
     length -= 1
+  } if (downDown) {
+    length += 1
   }
 }
 
@@ -112,16 +112,16 @@ function drawGraph() {
 }
 
 function drawText() {
-  let vals = document.getElementById('text')
+  let vals = document.getElementById('pendulum-text')
   vals.innerText = `X position: ${Math.round((ballPos[0] - ballStartingPos[0] + Number.EPSILON) * 100) / 100}m
-Angle: ${currentAngle}degrees
+Angle: ${Math.round((currentAngle + Number.EPSILON) * 100) / 100}degrees
 Length: ${length}m`
   vals.style.margin = '0em 1'
 }
 
 function drawSpeedArrows() {
   ctx.beginPath()
-  const lineConstant = 2
+  const lineConstant = 3
   const arrowConstant = 6
   let arrowConstantX = arrowConstant
   let arrowConstantY = arrowConstant
@@ -163,6 +163,24 @@ function drawSpeedArrows() {
   ctx.lineTo(ballPos[0] + ballSize / 2 + arrowConstantX, ballPos[1] + ballSize / 2 + yLineLength + arrowConstantY)
   ctx.moveTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2 + yLineLength)  
   ctx.lineTo(ballPos[0] + ballSize / 2 - arrowConstantX, ballPos[1] + ballSize / 2 + yLineLength + arrowConstantY)
+
+  // Diagonal
+  ctx.moveTo(ballPos[0] + ballSize / 2, ballPos[1] + ballSize / 2)
+  ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2 + yLineLength)
+
+  if (vel >= 0) {
+    ctx.moveTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2 + yLineLength) 
+    ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength - arrowConstant * Math.sin(radians(currentAngle + 45)), ballPos[1] + ballSize / 2 + yLineLength + arrowConstant * Math.cos(radians(currentAngle + 45)))
+    ctx.moveTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2 + yLineLength)
+    ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength - arrowConstant * Math.sin(radians(currentAngle + 135)), ballPos[1] + ballSize / 2 + yLineLength + arrowConstant * Math.cos(radians(currentAngle + 135)))
+  }
+  else {
+    ctx.moveTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2 + yLineLength)
+    ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength - arrowConstant * Math.sin(radians(currentAngle - 45)), ballPos[1] + ballSize / 2 + yLineLength + arrowConstant * Math.cos(radians(currentAngle - 45)))
+    ctx.moveTo(ballPos[0] + ballSize / 2 + xLineLength, ballPos[1] + ballSize / 2 + yLineLength)
+    ctx.lineTo(ballPos[0] + ballSize / 2 + xLineLength - arrowConstant * Math.sin(radians(currentAngle - 135)), ballPos[1] + ballSize / 2 + yLineLength + arrowConstant * Math.cos(radians(currentAngle - 135)))
+  }
+
   ctx.stroke()
 }
 
@@ -195,14 +213,16 @@ function drawWindow() {
   ctx.stroke()
 }
 
-function gameLoop() {
+export function pendulumGameLoop() {
   if (launch) {
     moveBall()
   } else {
     changeValues()
+    ballPos[0] = length * Math.cos(radians(maxAngle + 90)) + width / 2 - ballSize / 2
+    ballPos[1] = length * Math.sin(radians(maxAngle + 90)) + triangleHeight - ballSize / 2
+    currentAngle = maxAngle
   }
   drawWindow()
-  window.requestAnimationFrame(gameLoop);
 }
 
 export function pendulumStart() {
@@ -229,5 +249,4 @@ export function pendulumStart() {
         return;
     }
   })
-  window.requestAnimationFrame(gameLoop);
 }

@@ -240,7 +240,7 @@ function drawWindow() {
   ballRed.style.top = ballRedPos[1] + 'px'
 }
 
-function gameLoop() {
+export function objGameLoop() {
   if (shot) {
     moveBalls()
   }
@@ -248,7 +248,6 @@ function gameLoop() {
     changeValues()
   }
   drawWindow()
-  window.requestAnimationFrame(gameLoop);
 }
 
 export function objStart() {
@@ -278,5 +277,4 @@ export function objStart() {
         return;
     }
   })
-  window.requestAnimationFrame(gameLoop);
 }

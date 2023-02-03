@@ -18,14 +18,14 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: 14pt;
   left: 10px;
-  top: 10px;
+  top: 15px;
   margin: 0px;
   z-index: 20;
 }
 
 #pendulum-text-box {
-  width: 287px;
-  height: 137px;
+  width: 237px;
+  height: 87px;
   left: 5px;
   top: 5px;
   background-color: rgb(174, 174, 158);
