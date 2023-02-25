@@ -4,6 +4,9 @@ import { objStart } from "./obj-collision.js"
 import { objGameLoop } from "./obj-collision.js"
 import { pendulumStart } from "./pendulum.js"
 import { pendulumGameLoop } from "./pendulum.js"
+import { eFieldStart } from "./e-field.js"
+import { eFieldGameLoop } from "./e-field.js"
+
 
 const w = window.innerWidth;
 const h = window.innerHeight; 
@@ -14,9 +17,8 @@ const box_width = Math.floor((0.8 * w + buffer - buffer * num_elements) / (num_e
 const box_height = Math.floor(3 * box_width / 2)
 const framerate = 15
 
-let projInterval;
-let objInterval;
-let pendulumInterval;
+let projInterval, objInterval, pendulumInterval, eFieldInterval;
+
 
 function hideCards() {
   let cards = document.getElementsByClassName('cards')
@@ -60,8 +62,8 @@ function clickProjMotion() {
 }
 
 function clickObjCollision() {
-  objStart()
   hideCards()
+  objStart()
   clearInterval(objInterval)
   objInterval = setInterval(() => {
     objGameLoop()
@@ -69,8 +71,8 @@ function clickObjCollision() {
 }
 
 function clickPendulum() {
-  pendulumStart()
   hideCards()
+  pendulumStart()
   clearInterval(pendulumInterval)
   pendulumInterval = setInterval(() => {
     pendulumGameLoop()
@@ -78,8 +80,9 @@ function clickPendulum() {
 }
 
 function clickElectricField() {
-  eFieldStart()
   hideCards()
+  eFieldStart()
+  clearInterval(eFieldInterval)
   eFieldInterval = setInterval(() => {
     eFieldGameLoop()
   }, framerate)
@@ -105,6 +108,7 @@ document.addEventListener("keydown", function(event) {
     document.getElementById('proj-motion').style.display = "none"
     document.getElementById('obj-collision').style.display = "none"
     document.getElementById('pendulum').style.display = "none"
+    document.getElementById('e-field').style.display = "none";
     // add all backgrounds here
 
     let cards = document.getElementsByClassName('cards')

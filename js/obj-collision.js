@@ -252,10 +252,6 @@ export function objGameLoop() {
 
 export function objStart() {
   document.getElementById('obj-collision').style.display = "block"
-  document.getElementById('blue-obj-collision-text').style.display = "block"
-  document.getElementById('blue-obj-collision-text-box').style.display = "block"
-  document.getElementById('red-obj-collision-text').style.display = "block"
-  document.getElementById('red-obj-collision-text-box').style.display = "block"
 
   initialize()
   reset()

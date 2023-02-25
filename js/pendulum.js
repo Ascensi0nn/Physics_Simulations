@@ -227,8 +227,6 @@ export function pendulumGameLoop() {
 
 export function pendulumStart() {
   document.getElementById('pendulum').style.display = "block"
-  document.getElementById('pendulum-text-box').style.display = "block"
-  document.getElementById('pendulum-text').style.display = "block"
 
   reset()
   

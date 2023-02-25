@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>Physics Simulations</title>
-    <link rel="icon" type="image/x-icon" href="ball.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="proj-motion-styles.css">
-    <link rel="stylesheet" href="obj-collision-styles.css">
-    <link rel="stylesheet" href="pendulum-styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/ball.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/proj-motion-styles.css">
+    <link rel="stylesheet" href="/css/obj-collision-styles.css">
+    <link rel="stylesheet" href="/css/pendulum-styles.css">
+    <link rel="stylesheet" href="/css/e-field-styles.css">
   </head>
   <body>
     <!-- Header -->
@@ -18,25 +19,25 @@
     <!-- Selection Cards -->
     <div class="cards" id="proj-card">
       <div class="card-holder" id="proj-card-holder">
-        <img class="card-img" src="proj-motion.png">
+        <img class="card-img" src="/images/proj-motion.png">
         <p class="card-text">Projectile Motion</p>
       </div>
     </div>
     <div class="cards" id="obj-card">
       <div class="card-holder" id="obj-card-holder">
-        <img class="card-img" src="obj-collision.png">
+        <img class="card-img" src="/images/obj-collision.png">
         <p class="card-text">Object Collision</p>
       </div>
     </div>
     <div class="cards" id="pendulum-card">
       <div class="card-holder" id="pendulum-holder">
-        <img class="card-img" src="pendulum.png">
+        <img class="card-img" src="/images/pendulum.png">
         <p class="card-text">Pendulum</p>
       </div>
     </div>
     <div class="cards" id="e-field-card">
       <div class="card-holder" id="e-field-holder">
-        <img class="card-img" src="proj-motion.png">
+        <img class="card-img" src="/images/proj-motion.png">
         <p class="card-text">Electric Field</p>
       </div>
     </div>
@@ -52,11 +53,11 @@
     <div class="obj-collision" id="obj-collision">
       <pre class="blue-text" id="blue-obj-collision-text"></pre>
       <div class="blue" id="blue-obj-collision-text-box"></div>
-      <img class="blue" id="blue-obj-collision-ball" src="ballblue.png">
+      <img class="blue" id="blue-obj-collision-ball" src="/images/ballblue.png">
 
       <pre class="red-text" id="red-obj-collision-text"></pre>
       <div class="red" id="red-obj-collision-text-box"></div>
-      <img class="red" id="red-obj-collision-ball" src="ballred.png">
+      <img class="red" id="red-obj-collision-ball" src="/images/ballred.png">
       <canvas id="obj-canvas"></canvas>
     </div>
 
@@ -64,13 +65,22 @@
     <div class="pendulum" id="pendulum">
       <pre id="pendulum-text"></pre>
       <div id="pendulum-text-box"></div>
-      <img id="pendulum-ball" src="ball.png">
+      <img id="pendulum-ball" src="/images/ball.png">
       <canvas id="pendulum-canvas"></canvas>
     </div>
 
-    <script src="index.js" type="module" charset="utf-8"></script>
-    <script src="proj-motion.js" type="module" charset="utf-8"></script>
-    <script src="obj-collision.js" type="module" charset="utf-8"></script>
-    <script src="pendulum.js" type="module" charset="utf-8"></script>
+    <!-- Electric Field Sim -->
+    <div class="e-field" id="e-field">
+      <pre id="e-field-text"></pre>
+      <div id="e-field-text-box"></div>
+      <img class="charge" id="left-charge" src="/images/chargeblue.png">
+      <img class="charge" id="right-charge" src="/images/chargered.png">
+      <canvas id="e-field-canvas"></canvas>
+    </div>
+
+    <script src="/js/index.js" type="module" charset="utf-8"></script>
+    <script src="/js/proj-motion.js" type="module" charset="utf-8"></script>
+    <script src="/js/obj-collision.js" type="module" charset="utf-8"></script>
+    <script src="/js/pendulum.js" type="module" charset="utf-8"></script>
   </body>
 </html>

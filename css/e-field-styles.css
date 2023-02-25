@@ -1,8 +1,4 @@
-*{
-  position: absolute;
-}
-
-#proj-motion {
+#e-field {
   display: none;
   top: 75px;
   width: 1200px;
@@ -14,7 +10,7 @@
   transition: 0.5s;
 }
 
-#text.proj-motion {
+#e-field-text {
   font-family: 'Courier New', Courier, monospace;
   font-size: 14pt;
   left: 10px;
@@ -22,7 +18,8 @@
   margin: 0;
   z-index: 20;
 }
-#text-box.proj-motion {
+
+#e-field-text-box {
   width: 287px;
   height: 137px;
   left: 5px;
@@ -30,4 +27,8 @@
   background-color:rgb(174, 174, 158);
   border: solid white 1px;
   z-index: 5;
+}
+
+.charge{
+  z-index: 20;
 }

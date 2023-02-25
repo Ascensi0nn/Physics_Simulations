@@ -25,7 +25,7 @@ let upDown = false
 let downDown = false
 
 function initialize() {
-  ball.src = "ball.png"
+  ball.src = "/images/ball.png"
   ball.classList.add('proj-ball')
   ball.style.left = ballPos[0] + 'px'
   ball.style.top = ballPos[1] + 'px'
@@ -230,8 +230,6 @@ export function projGameLoop() {
 
 export function projStart() {
   document.getElementById('proj-motion').style.display = "block"
-  document.getElementById('text-box').style.display = "block"
-  document.getElementById('text').style.display = "block"
 
   initialize()
   reset()
