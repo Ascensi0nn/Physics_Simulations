@@ -27,3 +27,7 @@
   border: solid white 1px;
   z-index: 5;
 }
+
+#proj-ball {
+  z-index: 2;
+}

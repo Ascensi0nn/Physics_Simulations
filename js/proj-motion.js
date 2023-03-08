@@ -9,7 +9,7 @@ c.height = height;
 const ctx = c.getContext('2d')
 
 //Ball
-const ball = document.createElement('img')
+const ball = document.getElementById('proj-ball')
 const ballSize = 40
 const ballStartingPos = [10, height - ballSize]
 let ballPos = ballStartingPos
@@ -25,13 +25,10 @@ let upDown = false
 let downDown = false
 
 function initialize() {
-  ball.src = "./images/ball.png"
-  ball.classList.add('proj-ball')
   ball.style.left = ballPos[0] + 'px'
   ball.style.top = ballPos[1] + 'px'
   ball.style.width = ballSize + 'px'
   ball.style.height = ballSize + 'px'
-  background.appendChild(ball)
 }
 
 function reset() {
