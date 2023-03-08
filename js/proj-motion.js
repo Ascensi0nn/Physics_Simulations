@@ -25,7 +25,7 @@ let upDown = false
 let downDown = false
 
 function initialize() {
-  ball.src = ".images/ball.png"
+  ball.src = "images/ball.png"
   ball.classList.add('proj-ball')
   ball.style.left = ballPos[0] + 'px'
   ball.style.top = ballPos[1] + 'px'
